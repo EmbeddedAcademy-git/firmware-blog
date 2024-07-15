@@ -19,57 +19,76 @@
     </style>
     {% block extra_head %}{% endblock %}
 </head>
-<body class="bg-base-200 text-neutral-content">
-    <header class="bg-base-200 shadow">
-        <div class="navbar bg-base-100">
-            <div class="flex-1">
-              <a class="btn btn-ghost text-xl">daisyUI</a>
+<body class="bg-base-100">
+    <header class="navbar bg-base-300">
+        <div class="flex-1">
+            <div class=" btn btn-ghost text-xl text-center ">
+                <span class=" material-symbols-outlined md:hidden">
+                    menu
+                </span>
+                Blog
             </div>
-            <div class="flex-none gap-2">
-              <div class="form-control">
-                <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
-              </div>
-              <div class="dropdown dropdown-end">
-                <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-                  <div class="w-10 rounded-full">
-                    {% if request.user.is_authenticated %}
-                    <img
-                      alt="Tailwind CSS Navbar component"
-                      src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                    {% else %}
-                    <span class="material-symbols-outlined">
-                        account_circle
-                    </span>
-                    {% endif %}
-                  </div>
+        </div>
+        
+        <div class="flex-none gap-2">
+            <div class="form-control">
+            <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto w-max" />
+            </div>
+            <div class="dropdown dropdown-end">
+            <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                <div class="w-10 rounded-full">
+                {% if request.user.is_authenticated %}
+                <img
+                    alt="Tailwind CSS Navbar component"
+                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                {% else %}
+                <span class="text-4xl material-symbols-outlined">
+                    account_circle
+                </span>
+                {% endif %}
                 </div>
-                <ul
-                  tabindex="0"
-                  class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                  <li>
-                    <a class="justify-between">
-                      Profile
-                    </a>
-                  </li>
-                  <li><a>Settings</a></li>
-                  <li><a>Logout</a></li>
-                </ul>
-              </div>
+            </div>
+            {% if request.user.is_authenticated %}
+            <ul
+                tabindex="0"
+                class="menu menu-sm dropdown-content bg-base-300 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                <li><a>Profile</a></li>
+                <li><a>Settings</a></li>
+                <li><a>Logout</a></li>
+            </ul>
+            {% else %}
+            <ul
+                tabindex="0"
+                class="menu menu-sm dropdown-content bg-base-300 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                <li><a href="{%url 'account_login'%}">Sign In</a></li>
+                <li><a href="{%url 'account_signup'%}">Create Account</a></li>
+            </ul>
+            {% endif %}
             </div>
         </div>
     </header>
+    <div class="hero bg-base-100 min-h-screen">
+        <div class="container">
+            <div class="flex flex-row max-w-dvw h-screen">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+    
+    <!--
     <main>
         <div class="hero bg-base-100 min-h-screen">
             <div class="hero-content text-center">
-              <div class="max-w-md">
-                {% block content %}{% endblock %}
+              <div class="max-w-md">                  
+                
               </div>
             </div>
-          </div>
+        </div>
     </main>
+    -->
     <footer class="bg-base-200 shadow py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <p class="text-center text-sm text-neutral-content">© 2024 Django Project. All rights reserved.</p>
+            <p class="text-center text-sm">© 2024 Django Project. All rights reserved.</p>
         </div>
     </footer>
     {% block extra_scripts %}{% endblock %}
