@@ -16,81 +16,130 @@
                 'GRAD' 0,
                 'opsz' 24;
         }
+        .gradient_div {
+            position: relative;
+            background: radial-gradient(circle at 0 0, rgba(118, 255, 248, 0), transparent 0%);
+            transition: all 0.15s;
+        }
+        .gradient_div::before {
+            content: "";
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: radial-gradient(circle at var(--xPos) var(--yPos), rgba(0, 255, 255, 0.1), transparent 100%);
+            opacity: 0;
+            transition: all 0.15s ease-in-out;
+        }
+        .wide_gradient::before {
+            z-index: -1;
+        }
+        .gradient_div:hover::before {
+            opacity: 1;
+        }
+
+        .gradient_container:hover .gradient_div {
+            background: radial-gradient(circle at var(--xPos) var(--yPos), rgba(0, 225, 255, 0.3), transparent 40%);
+        }
+
+        @media (prefers-color-scheme: light) {
+            .gradient_div {
+                background: radial-gradient(circle at 0 0, rgba(0, 225, 255, 0.25), transparent 0%);
+            }
+            .gradient_div::before {
+                background: radial-gradient(circle at var(--xPos) var(--yPos), rgba(0, 225, 255, 0.25), transparent 70%);
+            }
+            .wide_gradient::before {
+                z-index: -1;
+            }   
+            .gradient_container:hover .gradient_div {
+                background: radial-gradient(circle at var(--xPos) var(--yPos), rgba(0, 225, 255, 0.25), transparent 40%);
+            }
+        }
     </style>
     {% block extra_head %}{% endblock %}
 </head>
-<body class="bg-base-100">
-    <header class="navbar bg-base-300">
-        <div class="flex-1">
-            <div class=" btn btn-ghost text-xl text-center ">
-                <span class=" material-symbols-outlined md:hidden">
-                    menu
-                </span>
-                Blog
+<body class="gradient_container">
+    <div class="wide_gradient gradient_div">
+        <header class=" bg-base-300/75 navbar">
+            <div class="flex-1">
+                <div class=" btn btn-ghost text-xl text-center ">
+                    <span class=" material-symbols-outlined md:hidden">
+                        menu
+                    </span>
+                    Blog
+                </div>
             </div>
-        </div>
-        
-        <div class="flex-none gap-2">
-            <div class="form-control">
-            <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto w-max" />
-            </div>
-            <div class="dropdown dropdown-end">
-            <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-                <div class="w-10 rounded-full">
+            
+            <div class="flex-none gap-2">
+                <div class=" btn btn-ghost text-xl text-center ">
+                    <span class="text-4xl material-symbols-outlined">
+                        search
+                    </span>
+                </div>
+                <div class="dropdown dropdown-end">
+                <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-10 rounded-full">
+                    {% if request.user.is_authenticated %}
+                    <img
+                        alt="Tailwind CSS Navbar component"
+                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                    {% else %}
+                    <span class="text-4xl material-symbols-outlined">
+                        account_circle
+                    </span>
+                    {% endif %}
+                    </div>
+                </div>
                 {% if request.user.is_authenticated %}
-                <img
-                    alt="Tailwind CSS Navbar component"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                <ul
+                    tabindex="0"
+                    class="menu menu-sm dropdown-content bg-base-300 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                    <li><a>Profile</a></li>
+                    <li><a>Settings</a></li>
+                    <li><a>Logout</a></li>
+                </ul>
                 {% else %}
-                <span class="text-4xl material-symbols-outlined">
-                    account_circle
-                </span>
+                <ul
+                    tabindex="0"
+                    class="menu menu-sm dropdown-content bg-base-300 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                    <li><a href="{%url 'account_login'%}">Sign In</a></li>
+                    <li><a href="{%url 'account_signup'%}">Create Account</a></li>
+                </ul>
                 {% endif %}
                 </div>
             </div>
-            {% if request.user.is_authenticated %}
-            <ul
-                tabindex="0"
-                class="menu menu-sm dropdown-content bg-base-300 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                <li><a>Profile</a></li>
-                <li><a>Settings</a></li>
-                <li><a>Logout</a></li>
-            </ul>
-            {% else %}
-            <ul
-                tabindex="0"
-                class="menu menu-sm dropdown-content bg-base-300 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                <li><a href="{%url 'account_login'%}">Sign In</a></li>
-                <li><a href="{%url 'account_signup'%}">Create Account</a></li>
-            </ul>
-            {% endif %}
-            </div>
-        </div>
-    </header>
-    <div class="hero bg-base-100 min-h-screen">
+        </header>
+    </div>  
+    <div class="hero min-h-screen">
         <div class="container">
             <div class="flex flex-row max-w-dvw h-screen">
-                {% block content %}{% endblock %}
+                {%block content%}{%endblock%}
             </div>
         </div>
     </div>
     
-    <!--
-    <main>
-        <div class="hero bg-base-100 min-h-screen">
-            <div class="hero-content text-center">
-              <div class="max-w-md">                  
-                
-              </div>
-            </div>
-        </div>
-    </main>
-    -->
-    <footer class="bg-base-200 shadow py-6">
+    <footer class="bg-base-300 shadow py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <p class="text-center text-sm">© 2024 Django Project. All rights reserved.</p>
         </div>
     </footer>
+    <script>
+        const cards = document.querySelectorAll(".gradient_div");
+        const wrapper = document.querySelector(".gradient_container");
+
+        wrapper.addEventListener("mousemove", function (event) {
+        cards.forEach((card) => {
+            const rect = card.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            card.style.setProperty("--xPos", `${x}px`);
+            card.style.setProperty("--yPos", `${y}px`);
+        });
+        });
+    </script>
     {% block extra_scripts %}{% endblock %}
 </body>
 </html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gradient Effect on Flat Cards</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@1.14.0/dist/full.css" rel="stylesheet">
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 400,
+                'GRAD' 0,
+                'opsz' 24;
+        }
+        .gradient_div {
+            position: relative;
+            background: radial-gradient(circle at 0 0, rgba(0, 255, 255, 0.1), transparent 0%);
+            transition: all 0.15s;
+        }
+        .gradient_div::before {
+            content: "";
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: radial-gradient(circle at var(--xPos) var(--yPos), rgba(0, 255, 255, 0.1), transparent 100%);
+            opacity: 0;
+            transition: all 0.15s ease-in-out;
+        }
+        .gradient_div:hover::before {
+            opacity: 1;
+        }
+        .gradient_container:hover .gradient_div {
+            background: radial-gradient(circle at var(--xPos) var(--yPos), rgba(0, 225, 255, 0.3), transparent 40%);
+        }
+
+        /* Light theme adjustments */
+        
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-900 text-white">
+    <div class="gradient_container flex flex-wrap justify-center items-center gap-4 p-8 w-11/12">
+        <div class="gradient_div bg-gray-800 p-4 w-80 h-60 transition-all transform hover:scale-95">
+            <div class="bg-gray-900 h-full w-full"></div>
+        </div>
+        <div class="gradient_div bg-gray-800 p-4 w-80 h-60 transition-all transform hover:scale-95">
+            <div class="bg-gray-900 h-full w-full"></div>
+        </div>
+        <div class="gradient_div bg-gray-800 p-4 w-80 h-60 transition-all transform hover:scale-95">
+            <div class="bg-gray-900 h-full w-full"></div>
+        </div>
+        <div class="gradient_div bg-gray-800 p-4 w-80 h-60 transition-all transform hover:scale-95">
+            <div class="bg-gray-900 h-full w-full"></div>
+        </div>
+        <div class="gradient_div bg-gray-800 p-4 w-80 h-60 transition-all transform hover:scale-95">
+            <div class="bg-gray-900 h-full w-full"></div>
+        </div>
+        <div class="gradient_div bg-gray-800 p-4 w-80 h-60 transition-all transform hover:scale-95">
+            <div class="bg-gray-900 h-full w-full"></div>
+        </div>
+    </div>
+
+    <script>
+        const gradientDivs = document.querySelectorAll(".gradient_div");
+        const gradientContainer = document.querySelector(".gradient_container");
+
+        gradientContainer.addEventListener("mousemove", function (event) {
+            gradientDivs.forEach((div) => {
+                const rect = div.getBoundingClientRect();
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
+
+                div.style.setProperty("--xPos", `${x}px`);
+                div.style.setProperty("--yPos", `${y}px`);
+            });
+        });
+    </script>
+</body>
+</html>

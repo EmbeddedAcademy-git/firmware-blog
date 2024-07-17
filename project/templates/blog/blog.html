@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spotlight Cards</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@1.14.0/dist/full.css" rel="stylesheet">
+  <style>
+    .card {
+      position: relative;
+      background: radial-gradient(circle at 0 0, rgba(118, 255, 248, 0), transparent 0%);
+      transition: all 0.15s;
+    }
+
+    .card::before {
+      content: "";
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: radial-gradient(circle at var(--xPos) var(--yPos), rgba(0, 255, 255, 0.1), transparent 100%);
+      opacity: 0;
+      transition: all 0.15s ease-in-out;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .cards:hover .card {
+      background: radial-gradient(circle at var(--xPos) var(--yPos), rgba(0, 225, 255, 0.3), transparent 40%);
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-base-300 ">
+  <div class="cards flex flex-wrap justify-center items-center gap-6 p-8 w-11/12">
+    <div class="card p-1 transition-all transform hover:scale-105">
+      <div class="card-content bg-base-200 rounded-xl h-full w-full p-4">
+        <pre><code>
+import random
+import string
+
+def generate_random_password(length=12):
+    # Define the character set for the password
+    characters = string.ascii_letters + string.digits + string.punctuation
+    
+    # Generate a random password
+    password = ''.join(random.choice(characters) for _ in range(length))
+    
+    return password
+
+# Generate a random password of length 12
+random_password = generate_random_password()
+print(f"Generated Password: {random_password}")
+        </code></pre>
+      </div>
+    </div>
+    <div class="card w-80 h-60 p-1 transition-all transform hover:scale-105">
+      <div class="card-content bg-base-100 rounded-xl h-full w-full"></div>
+    </div>
+  </div>
+
+  <script>
+    const cards = document.querySelectorAll(".card");
+    const wrapper = document.querySelector(".cards");
+
+    wrapper.addEventListener("mousemove", function (event) {
+      cards.forEach((card) => {
+        const rect = card.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+
+        card.style.setProperty("--xPos", `${x}px`);
+        card.style.setProperty("--yPos", `${y}px`);
+      });
+    });
+  </script>
+</body>
+</html>
