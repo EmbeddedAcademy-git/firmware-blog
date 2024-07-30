@@ -1,5 +1,5 @@
 {% extends 'core/base.html' %}
-{% block title %} {% blog.title %} {% endblock %}
+{% block title %} {{blog.title}} {% endblock %}
 {% block content %}
 
 <div id="blog" class="p-4 w-full flex-grow">
@@ -9,11 +9,11 @@
                 <div class="dark:bg-base-200/90 flex-grow flex flex-col lg:flex-row items-center gap-4 p-4">
                     <img
                     class="max-h-56 xl:max-w-56 h-full w-full object-cover"
-                    src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg"
+                    src="{{ blog.thumbnail_image.file.url }}"
                     alt="Album" />
                     <div class="container flex flex-wrap flex-col gap-3">
                         <div class="flex flex-inline justify-between items-center">
-                            <p class="text-4xl">Blog Item</p>
+                            <p class="text-4xl">{{blog.title}}</p>
                             <a class="hover:scale-105 active:scale-95" href="#">
                                 <span class="material-symbols-outlined">
                                     bookmark_add
@@ -25,57 +25,17 @@
                             <span class="material-symbols-outlined">
                                 account_circle
                             </span>
-                            <p>Varad Joshi</p>
-                            <p>at 13:00</p>
+                            <p>{{blog.author.name}}</p>
+                            <p>on {{blog.time_posted}}</p>
                         </a>
                         <a class="text-sm" href="#">
-                             Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description...
+                          {{blog.body}}
                         </a>
                         <div class="flex flex-inline gap-4 items-center justify-between">
                             <div class="self-start flex w-full flex-inline flex-wrap gap-1">
-                                <a class="text-accent active:scale-[0.98]" href="#">#EmbeddedSystems</a>
-                                <a class="text-accent active:scale-[0.98]" href="#">#Firmware</a>
-                                <a class="text-accent active:scale-[0.98]" href="#">#Microcontrollers</a>
-                                <a class="text-accent active:scale-[0.98]" href="#">#IoT</a>
-                            </div>       
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="gradient_div wide_gradient"> 
-            <div class="flex flex-col gap-2 bg-base-200/80">
-                <div class="dark:bg-base-200/90 flex-grow flex flex-col lg:flex-row items-center gap-4 p-4">
-                    <img
-                    class="max-h-56 xl:max-w-56 h-full w-full object-cover"
-                    src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg"
-                    alt="Album" />
-                    <div class="container flex flex-wrap flex-col gap-3">
-                        <div class="flex flex-inline justify-between items-center">
-                            <p class="text-4xl">Blog Item</p>
-                            <a class="hover:scale-105 active:scale-95" href="#">
-                                <span class="material-symbols-outlined">
-                                    bookmark_add
-                                </span>
-                            </a>
-                        </div>
-                        
-                        <a class="flex flex-inline gap-1 hover:text-accent" href="#">
-                            <span class="material-symbols-outlined">
-                                account_circle
-                            </span>
-                            <p>Varad Joshi</p>
-                            <p>at 13:00</p>
-                        </a>
-                        <a class="text-sm" href="#">
-                             Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description...
-                        </a>
-                        <div class="flex flex-inline gap-4 items-center justify-between">
-                            <div class="self-start flex w-full flex-inline flex-wrap gap-1">
-                                <a class="text-accent active:scale-[0.98]" href="#">#EmbeddedSystems</a>
-                                <a class="text-accent active:scale-[0.98]" href="#">#Firmware</a>
-                                <a class="text-accent active:scale-[0.98]" href="#">#Microcontrollers</a>
-                                <a class="text-accent active:scale-[0.98]" href="#">#IoT</a>
+                              {% for tag in blog.tags.all %}
+                                <a class="text-accent active:scale-[0.98]" href="#">#{{tag.tag}}</a>
+                              {% endfor %}
                             </div>       
                         </div>
                     </div>
