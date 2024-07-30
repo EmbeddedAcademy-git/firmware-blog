@@ -1,81 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spotlight Cards</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/daisyui@1.14.0/dist/full.css" rel="stylesheet">
-  <style>
-    .card {
-      position: relative;
-      background: radial-gradient(circle at 0 0, rgba(118, 255, 248, 0), transparent 0%);
-      transition: all 0.15s;
-    }
+{% extends 'core/base.html' %}
+{% block title %} {% blog.title %} {% endblock %}
+{% block content %}
 
-    .card::before {
-      content: "";
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      background: radial-gradient(circle at var(--xPos) var(--yPos), rgba(0, 255, 255, 0.1), transparent 100%);
-      opacity: 0;
-      transition: all 0.15s ease-in-out;
-    }
-
-    .card:hover::before {
-      opacity: 1;
-    }
-
-    .cards:hover .card {
-      background: radial-gradient(circle at var(--xPos) var(--yPos), rgba(0, 225, 255, 0.3), transparent 40%);
-    }
-  </style>
-</head>
-<body class="flex items-center justify-center min-h-screen bg-base-300 ">
-  <div class="cards flex flex-wrap justify-center items-center gap-6 p-8 w-11/12">
-    <div class="card p-1 transition-all transform hover:scale-105">
-      <div class="card-content bg-base-200 rounded-xl h-full w-full p-4">
-        <pre><code>
-import random
-import string
-
-def generate_random_password(length=12):
-    # Define the character set for the password
-    characters = string.ascii_letters + string.digits + string.punctuation
-    
-    # Generate a random password
-    password = ''.join(random.choice(characters) for _ in range(length))
-    
-    return password
-
-# Generate a random password of length 12
-random_password = generate_random_password()
-print(f"Generated Password: {random_password}")
-        </code></pre>
-      </div>
+<div id="blog" class="p-4 w-full flex-grow">
+    <div class="flex flex-col gap-3 ">
+        <div class="gradient_div wide_gradient"> 
+            <div class="flex flex-col gap-2 bg-base-200/80">
+                <div class="dark:bg-base-200/90 flex-grow flex flex-col lg:flex-row items-center gap-4 p-4">
+                    <img
+                    class="max-h-56 xl:max-w-56 h-full w-full object-cover"
+                    src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg"
+                    alt="Album" />
+                    <div class="container flex flex-wrap flex-col gap-3">
+                        <div class="flex flex-inline justify-between items-center">
+                            <p class="text-4xl">Blog Item</p>
+                            <a class="hover:scale-105 active:scale-95" href="#">
+                                <span class="material-symbols-outlined">
+                                    bookmark_add
+                                </span>
+                            </a>
+                        </div>
+                        
+                        <a class="flex flex-inline gap-1 hover:text-accent" href="#">
+                            <span class="material-symbols-outlined">
+                                account_circle
+                            </span>
+                            <p>Varad Joshi</p>
+                            <p>at 13:00</p>
+                        </a>
+                        <a class="text-sm" href="#">
+                             Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description...
+                        </a>
+                        <div class="flex flex-inline gap-4 items-center justify-between">
+                            <div class="self-start flex w-full flex-inline flex-wrap gap-1">
+                                <a class="text-accent active:scale-[0.98]" href="#">#EmbeddedSystems</a>
+                                <a class="text-accent active:scale-[0.98]" href="#">#Firmware</a>
+                                <a class="text-accent active:scale-[0.98]" href="#">#Microcontrollers</a>
+                                <a class="text-accent active:scale-[0.98]" href="#">#IoT</a>
+                            </div>       
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="gradient_div wide_gradient"> 
+            <div class="flex flex-col gap-2 bg-base-200/80">
+                <div class="dark:bg-base-200/90 flex-grow flex flex-col lg:flex-row items-center gap-4 p-4">
+                    <img
+                    class="max-h-56 xl:max-w-56 h-full w-full object-cover"
+                    src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg"
+                    alt="Album" />
+                    <div class="container flex flex-wrap flex-col gap-3">
+                        <div class="flex flex-inline justify-between items-center">
+                            <p class="text-4xl">Blog Item</p>
+                            <a class="hover:scale-105 active:scale-95" href="#">
+                                <span class="material-symbols-outlined">
+                                    bookmark_add
+                                </span>
+                            </a>
+                        </div>
+                        
+                        <a class="flex flex-inline gap-1 hover:text-accent" href="#">
+                            <span class="material-symbols-outlined">
+                                account_circle
+                            </span>
+                            <p>Varad Joshi</p>
+                            <p>at 13:00</p>
+                        </a>
+                        <a class="text-sm" href="#">
+                             Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description Blog description...
+                        </a>
+                        <div class="flex flex-inline gap-4 items-center justify-between">
+                            <div class="self-start flex w-full flex-inline flex-wrap gap-1">
+                                <a class="text-accent active:scale-[0.98]" href="#">#EmbeddedSystems</a>
+                                <a class="text-accent active:scale-[0.98]" href="#">#Firmware</a>
+                                <a class="text-accent active:scale-[0.98]" href="#">#Microcontrollers</a>
+                                <a class="text-accent active:scale-[0.98]" href="#">#IoT</a>
+                            </div>       
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="card w-80 h-60 p-1 transition-all transform hover:scale-105">
-      <div class="card-content bg-base-100 rounded-xl h-full w-full"></div>
-    </div>
-  </div>
+</div>
 
-  <script>
-    const cards = document.querySelectorAll(".card");
-    const wrapper = document.querySelector(".cards");
-
-    wrapper.addEventListener("mousemove", function (event) {
-      cards.forEach((card) => {
-        const rect = card.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
-
-        card.style.setProperty("--xPos", `${x}px`);
-        card.style.setProperty("--yPos", `${y}px`);
-      });
-    });
-  </script>
-</body>
-</html>
+{% endblock %}

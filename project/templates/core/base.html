@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% endblock %} | Django Project</title>
+    <title>{% block title %}{% endblock %} | Embedded Academy</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/htmx.org@2.0.1" integrity="sha384-QWGpdj554B4ETpJJC9z+ZHJcA/i59TyjxEPXiiUgN2WmTyV5OEZWCD6gQhgkdpB/" crossorigin="anonymous"></script>
@@ -61,58 +61,97 @@
 <body class="gradient_container">
     <div class="wide_gradient gradient_div">
         <header class="bg-base-300/95 hover:bg-base-300/75 navbar">
-            <div class="flex-1">
-                <div class=" btn btn-ghost text-xl text-center ">
-                    <span class=" material-symbols-outlined md:hidden">
+            <div class="flex-1 wide_gradient text-xl ">
+                <button id="toggle-sidebar" class="btn btn-ghost md:hidden">
+                    <span id="hamburger" class="material-symbols-outlined md:hidden">
                         menu
                     </span>
-                    Blog
-                </div>
+                    <span id="close_sidebar" class="material-symbols-outlined hidden">
+                        arrow_back_ios
+                    </span>
+                </button>
+                <a href="#" class="text-md md:text-xl md:mx-4">
+                    Embedded Academy
+                </a>
             </div>
             
-            <div class="flex-none gap-2">
+            <div class="flex-none">
                 <div class=" btn btn-ghost text-xl text-center ">
                     <span class="text-4xl material-symbols-outlined">
                         search
                     </span>
                 </div>
                 <div class="dropdown dropdown-end">
-                <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-                    <div class="w-10 rounded-full">
-                    {% if request.user.is_authenticated %}
-                    <img
-                        alt="Tailwind CSS Navbar component"
-                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                    {% else %}
-                    <span class="text-4xl material-symbols-outlined">
-                        account_circle
-                    </span>
-                    {% endif %}
+                    <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                        <div class="w-10 rounded-full">
+                        {% if request.user.is_authenticated %}
+                        <img
+                            alt="Tailwind CSS Navbar component"
+                            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                        {% else %}
+                        <span class="text-4xl material-symbols-outlined">
+                            account_circle
+                        </span>
+                        {% endif %}
+                        </div>
                     </div>
-                </div>
-                {% if request.user.is_authenticated %}
-                <ul
-                    tabindex="0"
-                    class="menu menu-sm dropdown-content bg-base-300 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                    <li><a>Profile</a></li>
-                    <li><a>Settings</a></li>
-                    <li><a>Logout</a></li>
-                </ul>
-                {% else %}
-                <ul
-                    tabindex="0"
-                    class="menu menu-sm dropdown-content bg-base-300 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                    <li><a href="{%url 'account_login'%}">Sign In</a></li>
-                    <li><a href="{%url 'account_signup'%}">Create Account</a></li>
-                </ul>
-                {% endif %}
+                    {% if request.user.is_authenticated %}
+                    <ul
+                        tabindex="0"
+                        class="menu menu-sm dropdown-content bg-base-300 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                        <li><a>Profile</a></li>
+                        <li><a>Settings</a></li>
+                        <li><a>Logout</a></li>
+                    </ul>
+                    {% else %}
+                    <ul
+                        tabindex="0"
+                        class="menu menu-sm dropdown-content bg-base-300 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                        <li><a href="{%url 'account_login'%}">Sign In</a></li>
+                        <li><a href="{%url 'account_signup'%}">Create Account</a></li>
+                    </ul>
+                    {% endif %}
                 </div>
             </div>
         </header>
     </div>  
     <div class="hero min-h-screen">
         <div class="container">
-            <div class="flex flex-row max-w-dvw">
+            <div class="flex flex-row max-w-dvw item">
+                <div id="sidebar" class="md:flex flex flex-col lg:w-1/5 gap-7 p-4 hidden text-xl h-screen">
+                    <a></a>
+                    <a href="#"
+                     class="flex flex-inline gap-1 items-center active:scale-95 hover:text-accent hover:scale-105">
+                        <span class="material-symbols-outlined">
+                            home
+                        </span>
+                        Home
+                    </a>
+                    <a href="#"
+                     class="flex flex-inline gap-1 items-center active:scale-95 hover:text-accent hover:scale-105">
+                        <span class="material-symbols-outlined">
+                        menu_book
+                        </span>
+                        Courses
+                    </a>
+                    <a href="#"
+                     class="flex flex-inline gap-1 items-center active:scale-95 hover:text-accent hover:scale-105">
+                        <span class="material-symbols-outlined">
+                        bookmarks
+                        </span>
+                        Saved
+                    </a>
+                    <a href="#"
+                     class="flex flex-inline gap-1 items-center active:scale-95 hover:text-accent hover:scale-105">
+                        <span class="material-symbols-outlined">
+                        tag
+                        </span>
+                        Tags
+                    </a>
+                </div>
+                
+                <div class="h-full w-0 md:w-1 bg-neutral"></div>
+                
                 {%block content%}{%endblock%}
             </div>
         </div>
@@ -120,7 +159,7 @@
     
     <footer class="bg-base-300 shadow py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <p class="text-center text-sm">© 2024 Django Project. All rights reserved.</p>
+            <p class="text-center text-sm">© 2024 Embedded Academy. All rights reserved.</p>
         </div>
     </footer>
     <script>
@@ -136,6 +175,18 @@
             card.style.setProperty("--xPos", `${x}px`);
             card.style.setProperty("--yPos", `${y}px`);
         });
+        });
+    </script>
+    <script>
+        document.getElementById('toggle-sidebar').addEventListener('click', function() {
+            var sidebar = document.getElementById('sidebar');
+            var blog = document.getElementById('blog');
+            var hamburger = document.getElementById('hamburger');
+            var close_sidebar = document.getElementById('close_sidebar');
+            sidebar.classList.toggle('hidden');
+            blog.classList.toggle('hidden');
+            hamburger.classList.toggle('hidden');
+            close_sidebar.classList.toggle('hidden');
         });
     </script>
     {% block extra_scripts %}{% endblock %}
