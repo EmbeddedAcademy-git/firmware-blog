@@ -5,6 +5,7 @@ class Blog(models.Model):
     id = models.AutoField(primary_key=True)
     thumbnail_image = models.ForeignKey(Image, on_delete=models.CASCADE, related_name='blogs')
     title = models.TextField()
+    summary = models.TextField()
     body = models.TextField()
     author = models.ForeignKey(Userprofile, on_delete=models.CASCADE, related_name='blogs')
     time_posted = models.DateTimeField(auto_now_add=True)

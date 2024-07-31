@@ -29,14 +29,14 @@
                             <p>on {{blog.time_posted}}</p>
                         </a>
                         <a class="text-sm" href="#">
-                          {{blog.body}}
+                          {{blog.summary}}
                         </a>
                         <div class="flex flex-inline gap-4 items-center justify-between">
                             <div class="self-start flex w-full flex-inline flex-wrap gap-1">
                               {% for tag in blog.tags.all %}
                                 <a class="text-accent active:scale-[0.98]" href="#">#{{tag.tag}}</a>
                               {% endfor %}
-                            </div>       
+                            </div>
                         </div>
                     </div>
                 </div>
