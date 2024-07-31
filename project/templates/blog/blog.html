@@ -3,46 +3,45 @@
 {% block content %}
 
 <div id="blog" class="p-4 w-full flex-grow">
-    <div class="flex flex-col gap-3 ">
-        <div class="gradient_div wide_gradient"> 
-            <div class="flex flex-col gap-2 bg-base-200/80">
-                <div class="dark:bg-base-200/90 flex-grow flex flex-col lg:flex-row items-center gap-4 p-4">
-                    <img
-                    class="max-h-56 xl:max-w-56 h-full w-full object-cover"
-                    src="{{ blog.thumbnail_image.file.url }}"
-                    alt="Album" />
-                    <div class="container flex flex-wrap flex-col gap-3">
-                        <div class="flex flex-inline justify-between items-center">
-                            <p class="text-4xl">{{blog.title}}</p>
-                            <a class="hover:scale-105 active:scale-95" href="#">
-                                <span class="material-symbols-outlined">
-                                    bookmark_add
-                                </span>
-                            </a>
-                        </div>
-                        
-                        <a class="flex flex-inline gap-1 hover:text-accent" href="#">
-                            <span class="material-symbols-outlined">
-                                account_circle
-                            </span>
-                            <p>{{blog.author.name}}</p>
-                            <p>on {{blog.time_posted}}</p>
+    <div class="gradient_div wide_gradient"> 
+        <div class="flex flex-col gap-2 bg-base-200/80"> 
+            <div class="dark:bg-base-200/90 flex-grow flex flex-col lg:flex-row items-center gap-4 p-4">
+                <img
+                class="max-h-56 xl:max-w-56 h-full w-full object-cover"
+                src="{{ blog.thumbnail_image.file.url }}"
+                alt="Album" />
+                <div class="container flex flex-wrap flex-col gap-3">
+                    <div class="flex flex-inline justify-between items-center">
+                        <a href="{% url 'blog_view' blog.id %}" class="text-4xl self-start">
+                            <p>{{blog.title}}</p>
                         </a>
-                        <a class="text-sm" href="#">
-                          {{blog.summary}}
+                        <a class="hover:scale-105 active:scale-95" href="#">
+                            <!--<span class="material-symbols-outlined">
+                                bookmark_add
+                            </span>-->
                         </a>
-                        <div class="flex flex-inline gap-4 items-center justify-between">
-                            <div class="self-start flex w-full flex-inline flex-wrap gap-1">
-                              {% for tag in blog.tags.all %}
-                                <a class="text-accent active:scale-[0.98]" href="#">#{{tag.tag}}</a>
-                              {% endfor %}
-                            </div>
+                    </div>
+                    
+                    <a class="flex flex-inline gap-1 hover:text-accent" href="#">
+                        <img class="w-6 mr-1 rounded-full" src="{{blog.author.profile_image.file.url}}">
+                        <p>{{blog.author.name}}</p>
+                        <p>on {{blog.time_posted}}</p>
+                    </a>
+                    <a class="text-sm h-24" href="{% url 'blog_view' blog.id %}">
+                      {{blog.summary}}
+                    </a>
+                    <div class="flex flex-inline gap-4 items-center justify-between">
+                        <div class="self-start flex w-full flex-inline flex-wrap gap-1">
+                          {% for tag in blog.tags.all %}
+                            <a class="text-accent active:scale-[0.98]" href="{% url 'tag' tag.tag%}">#{{tag.tag}}</a>
+                          {% endfor %}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    {{body | safe}}
 </div>
 
 {% endblock %}

@@ -70,16 +70,16 @@
                         arrow_back_ios
                     </span>
                 </button>
-                <a href="#" class="text-md md:text-xl md:mx-4">
+                <a href="{% url 'index' %}" class="text-md md:text-xl md:mx-4">
                     Embedded Academy
                 </a>
             </div>
             
             <div class="flex-none">
                 <div class=" btn btn-ghost text-xl text-center ">
-                    <span class="text-4xl material-symbols-outlined">
+                    <!--<span class="text-4xl material-symbols-outlined">
                         search
-                    </span>
+                    </span>-->
                 </div>
                 <div class="dropdown dropdown-end">
                     <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
@@ -120,7 +120,7 @@
             <div class="flex flex-row max-w-dvw item">
                 <div id="sidebar" class="md:flex flex flex-col lg:w-1/5 gap-7 p-4 hidden text-xl h-screen">
                     <a></a>
-                    <a href="#"
+                    <a href="{% url 'index' %}"
                      class="flex flex-inline gap-1 items-center active:scale-95 hover:text-accent hover:scale-105">
                         <span class="material-symbols-outlined">
                             home

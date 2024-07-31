@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 import markdown2
 from bs4 import BeautifulSoup
+import re
 from .models import *
 
 def blog_view(request, id):
@@ -15,10 +16,11 @@ def blog_view(request, id):
 
 # Add a parser for markdown to tailwind
 def parse_markdown(markdown_text):
+    # Convert Markdown to HTML
     html_content = markdown2.markdown(markdown_text, extras=["fenced-code-blocks", "tables"])
     soup = BeautifulSoup(html_content, 'html.parser')
 
-    # Add Tailwind classes to various HTML elements
+    # Add DaisyUI classes to various HTML elements
     for tag in soup.find_all(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']):
         tag['class'] = tag.get('class', []) + ['font-bold', 'my-4', 'text-gray-900', 'dark:text-gray-100']
         if tag.name == 'h1':
@@ -34,6 +36,12 @@ def parse_markdown(markdown_text):
         elif tag.name == 'h6':
             tag['class'] += ['text-sm']
 
+        # Add an ID to the header for anchor links
+        if not tag.get('id'):
+            # Create an ID from the header text
+            header_id = re.sub(r'\W+', '-', tag.get_text(strip=True)).lower()
+            tag['id'] = header_id
+
     for tag in soup.find_all('p'):
         tag['class'] = tag.get('class', []) + ['my-2', 'text-gray-800', 'dark:text-gray-200']
 
@@ -44,10 +52,13 @@ def parse_markdown(markdown_text):
         tag['class'] = tag.get('class', []) + ['list-decimal', 'ml-5', 'text-gray-800', 'dark:text-gray-200']
 
     for tag in soup.find_all('code'):
-        tag['class'] = tag.get('class', []) + ['bg-gray-100', 'rounded', 'p-1', 'text-red-600', 'dark:bg-gray-800', 'dark:text-red-400']
+        tag['class'] = tag.get('class', []) + ['bg-gray-100', 'rounded', 'px-1', 'text-red-600', 'dark:bg-gray-800', 'dark:text-red-400']
 
     for tag in soup.find_all('pre'):
         tag['class'] = tag.get('class', []) + ['bg-gray-100', 'rounded', 'p-4', 'my-4', 'overflow-auto', 'dark:bg-gray-800']
+        code_tag = tag.find('code')
+        if code_tag:
+            code_tag['class'] = code_tag.get('class', []) + ['block']
 
     for tag in soup.find_all('table'):
         tag['class'] = tag.get('class', []) + ['table-auto', 'w-full', 'my-4', 'border-collapse', 'text-gray-800', 'dark:text-gray-200']
@@ -55,5 +66,8 @@ def parse_markdown(markdown_text):
             th['class'] = th.get('class', []) + ['border', 'px-4', 'py-2', 'bg-gray-200', 'dark:bg-gray-700', 'dark:text-gray-100']
         for td in tag.find_all('td'):
             td['class'] = td.get('class', []) + ['border', 'px-4', 'py-2', 'dark:border-gray-700']
+
+    for tag in soup.find_all('a'):
+        tag['class'] = tag.get('class', []) + ['text-blue-600', 'hover:underline', 'dark:text-blue-400']
 
     return str(soup)
