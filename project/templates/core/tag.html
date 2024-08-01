@@ -1,8 +1,9 @@
 {% extends 'core/base.html' %}
-{% block title %} Home {% endblock %}
+{% block title %} {{tags.tag}} {% endblock %}
 {% block content %}
 
 <div id="blog" class="p-4 w-full flex-grow">
+    <h1 class="text-4xl mb-8">Posts tagged with #{{tags.tag}}</h1>
     <div class="flex flex-col gap-3 md:w-4/5">
         {% for blog in blogs %}
         <div class="flex flex-col gap-3 ">
