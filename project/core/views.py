@@ -9,10 +9,10 @@ def coming_soon(request):
         context = {
             'user': userprofile,
         }
-
-    return render(request, 'coming_soon.html', context)
-
-
+        return render(request, 'core/coming_soon.html', context)
+    else:
+        return render(request, 'core/coming_soon.html')
+    
 def index(request):
     blogs = Blog.objects.all()
     tags = Tag.objects.all()
