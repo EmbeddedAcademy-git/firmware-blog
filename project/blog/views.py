@@ -8,10 +8,18 @@ def blog_view(request, id):
     # Handle post request here to save to reading list
     blog = get_object_or_404(Blog, id=id)
     body = parse_markdown(blog.body)
-    context = {
-        'blog':blog,
-        'body':body
-    }
+    if request.user.is_authenticated:
+        userprofile = Userprofile.objects.get(user=request.user)
+        context = {
+            'blog':blog,
+            'body':body,
+            'user': userprofile,
+        }
+    else:
+        context = {
+            'blog':blog,
+            'body':body
+        }
     return render(request, "blog/blog.html", context)
 
 # Add a parser for markdown to tailwind
