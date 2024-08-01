@@ -153,7 +153,7 @@
                 
                 <div class="h-full w-0 md:w-1 bg-neutral"></div>
                 
-                {%block content%}{%endblock%}
+                <div id="content">{%block content%}{%endblock%}</div>
             </div>
         </div>
     </div>
@@ -181,7 +181,7 @@
     <script>
         document.getElementById('toggle-sidebar').addEventListener('click', function() {
             var sidebar = document.getElementById('sidebar');
-            var blog = document.getElementById('blog');
+            var content = document.getElementById('content');
             var hamburger = document.getElementById('hamburger');
             var close_sidebar = document.getElementById('close_sidebar');
             sidebar.classList.toggle('hidden');
