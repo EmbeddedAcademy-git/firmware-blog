@@ -29,7 +29,6 @@ ALLOWED_HOSTS = ['embeddedacademy.co.in', 'www.embeddedacademy.co.in']
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
