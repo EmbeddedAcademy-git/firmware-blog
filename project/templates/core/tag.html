@@ -19,14 +19,14 @@
                                 <a href="{% url 'blog_view' blog.id %}" class="text-4xl self-start">
                                     <p>{{blog.title}}</p>
                                 </a>
-                                <a class="hover:scale-105 active:scale-95" href="#">
-                                    <!--<span class="material-symbols-outlined">
+                                <!--<a class="hover:scale-105 active:scale-95" href="{% url 'coming_soon' %}">
+                                    <span class="material-symbols-outlined">
                                         bookmark_add
-                                    </span>-->
-                                </a>
+                                    </span>
+                                </a>-->
                             </div>
                             
-                            <a class="flex flex-inline gap-1 hover:text-accent" href="#">
+                            <a class="flex flex-inline gap-1 hover:text-accent" href="{% url 'coming_soon' %}">
                                 <img class="w-6 mr-1 rounded-full" src="{{blog.author.profile_image.file.url}}">
                                 <p>{{blog.author.name}}</p>
                                 <p>on {{blog.time_posted}}</p>

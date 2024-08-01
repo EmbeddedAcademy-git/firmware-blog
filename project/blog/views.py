@@ -22,7 +22,7 @@ def parse_markdown(markdown_text):
 
     # Add DaisyUI classes to various HTML elements
     for tag in soup.find_all(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']):
-        tag['class'] = tag.get('class', []) + ['font-bold', 'my-4', 'text-gray-900', 'dark:text-gray-100']
+        tag['class'] = tag.get('class', []) + ['font-bold', 'my-4']
         if tag.name == 'h1':
             tag['class'] += ['text-3xl']
         elif tag.name == 'h2':
@@ -43,31 +43,38 @@ def parse_markdown(markdown_text):
             tag['id'] = header_id
 
     for tag in soup.find_all('p'):
-        tag['class'] = tag.get('class', []) + ['my-2', 'text-gray-800', 'dark:text-gray-200']
+        tag['class'] = tag.get('class', []) + ['my-2']
 
     for tag in soup.find_all('ul'):
-        tag['class'] = tag.get('class', []) + ['list-disc', 'ml-5', 'text-gray-800', 'dark:text-gray-200']
+        tag['class'] = tag.get('class', []) + ['list-disc', 'ml-5']
 
     for tag in soup.find_all('ol'):
-        tag['class'] = tag.get('class', []) + ['list-decimal', 'ml-5', 'text-gray-800', 'dark:text-gray-200']
+        tag['class'] = tag.get('class', []) + ['list-decimal', 'ml-5']
 
     for tag in soup.find_all('code'):
-        tag['class'] = tag.get('class', []) + ['bg-gray-100', 'rounded', 'px-1', 'text-red-600', 'dark:bg-gray-800', 'dark:text-red-400']
+        tag['class'] = tag.get('class', []) + ['px-1']
 
     for tag in soup.find_all('pre'):
-        tag['class'] = tag.get('class', []) + ['bg-gray-100', 'rounded', 'p-4', 'my-4', 'overflow-auto', 'dark:bg-gray-800']
+        # Create the mockup-code div
+        mockup_code_div = soup.new_tag('div', **{'class': 'mockup-code'})
+        
+        # Add the DaisyUI classes to the pre tag
+        tag['class'] = tag.get('class', []) + ['rounded', 'p-4', 'my-4', 'overflow-auto']
+        
         code_tag = tag.find('code')
         if code_tag:
-            code_tag['class'] = code_tag.get('class', []) + ['block']
+            code_tag.extract()
+            tag.append(code_tag)
+        tag.wrap(mockup_code_div)
 
     for tag in soup.find_all('table'):
-        tag['class'] = tag.get('class', []) + ['table-auto', 'w-full', 'my-4', 'border-collapse', 'text-gray-800', 'dark:text-gray-200']
+        tag['class'] = tag.get('class', []) + ['table-auto', 'w-full', 'my-4', 'border-collapse']
         for th in tag.find_all('th'):
-            th['class'] = th.get('class', []) + ['border', 'px-4', 'py-2', 'bg-gray-200', 'dark:bg-gray-700', 'dark:text-gray-100']
+            th['class'] = th.get('class', []) + ['border', 'px-4', 'py-2']
         for td in tag.find_all('td'):
-            td['class'] = td.get('class', []) + ['border', 'px-4', 'py-2', 'dark:border-gray-700']
+            td['class'] = td.get('class', []) + ['border', 'px-4', 'py-2']
 
     for tag in soup.find_all('a'):
-        tag['class'] = tag.get('class', []) + ['text-blue-600', 'hover:underline', 'dark:text-blue-400']
+        tag['class'] = tag.get('class', []) + ['hover:text-accent']
 
     return str(soup)

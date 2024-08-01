@@ -18,14 +18,14 @@
                                 <a href="{% url 'blog_view' blog.id %}" class="text-4xl self-start">
                                     <p>{{blog.title}}</p>
                                 </a>
-                                <a class="hover:scale-105 active:scale-95" href="#">
-                                    <!--<span class="material-symbols-outlined">
+                                <!--<a class="hover:scale-105 active:scale-95" href="{% url 'coming_soon' %}">
+                                    <span class="material-symbols-outlined">
                                         bookmark_add
-                                    </span>-->
-                                </a>
+                                    </span>
+                                </a>-->
                             </div>
                             
-                            <a class="flex flex-inline gap-1 hover:text-accent" href="#">
+                            <a class="flex flex-inline gap-1 hover:text-accent" href="{% url 'coming_soon' %}">
                                 <img class="w-6 mr-1 rounded-full" src="{{blog.author.profile_image.file.url}}">
                                 <p>{{blog.author.name}}</p>
                                 <p>on {{blog.time_posted}}</p>
@@ -63,126 +63,36 @@
     
   </div>
 
+  {% if list %}
   <h1 class="text-4xl mt-6 ml-4">Reading List</h1>
   <div class="h-2/3 p-4 overflow-y-auto">
     <div class="flex flex-col gap-2">
-        <a class="gradient_div p-1 hover:scale-105 active:scale-95" href="#">
+        {% for reading_list in list %}
+        {% for post in reading_list.posts.all %}
+        <a class="gradient_div p-1 hover:scale-105 active:scale-95" href="{% url 'blog_view' post.id%}">
             <div class="flex flex-inline gap-4 bg-base-200 h-36 p-2">
                 <img class="h-full"
-                src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg"
+                src="{{ post.thumbnail_image.file.url }}"
                 alt="Album" />
                 <div class="flex flex-col gap-2 w-full">
-                    <p class="text-4xl text-start">Blog Item</p>
+                    <p class="text-xl font-medium text-start">{{ post.title }}</p>
                     <div class="flex flex-inline gap-1 hover:text-accent">
-                        <span class="material-symbols-outlined">
-                            account_circle
-                        </span>
-                        <p>Varad Joshi</p>
-                        <p>at 13:00</p>
+                        <img class="w-6 mr-1 rounded-full" src="{{post.author.profile_image.file.url}}">
+                        <p>{{post.author.name}}</p>
                     </div>
-                    <div class="flex flex-inline gap-4 text-sm">
-                        #EmbeddedSystems
-                        #Firmware
-                        #Microcontrollers
-                        #IoT
+                    <div class="flex flex-inline gap-4 text-xs">
+                        {% for tag in post.tags.all %}
+                        #{{tag.tag}}
+                        {% endfor %}
                     </div>
                 </div>
             </div>
         </a>
-        <a class="gradient_div p-1 hover:scale-105 active:scale-95" href="#">
-            <div class="flex flex-inline gap-4 bg-base-200 h-36 p-2">
-                <img class="h-full"
-                src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg"
-                alt="Album" />
-                <div class="flex flex-col gap-2 w-full">
-                    <p class="text-4xl text-start">Blog Item</p>
-                    <div class="flex flex-inline gap-1 hover:text-accent">
-                        <span class="material-symbols-outlined">
-                            account_circle
-                        </span>
-                        <p>Varad Joshi</p>
-                        <p>at 13:00</p>
-                    </div>
-                    <div class="flex flex-inline gap-4 text-sm">
-                        #EmbeddedSystems
-                        #Firmware
-                        #Microcontrollers
-                        #IoT
-                    </div>
-                </div>
-            </div>
-        </a>
-        <a class="gradient_div p-1 hover:scale-105 active:scale-95" href="#">
-            <div class="flex flex-inline gap-4 bg-base-200 h-36 p-2">
-                <img class="h-full"
-                src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg"
-                alt="Album" />
-                <div class="flex flex-col gap-2 w-full">
-                    <p class="text-4xl text-start">Blog Item</p>
-                    <div class="flex flex-inline gap-1 hover:text-accent">
-                        <span class="material-symbols-outlined">
-                            account_circle
-                        </span>
-                        <p>Varad Joshi</p>
-                        <p>at 13:00</p>
-                    </div>
-                    <div class="flex flex-inline gap-4 text-sm">
-                        #EmbeddedSystems
-                        #Firmware
-                        #Microcontrollers
-                        #IoT
-                    </div>
-                </div>
-            </div>
-        </a>
-        <a class="gradient_div p-1 hover:scale-105 active:scale-95" href="#">
-            <div class="flex flex-inline gap-4 bg-base-200 h-36 p-2">
-                <img class="h-full"
-                src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg"
-                alt="Album" />
-                <div class="flex flex-col gap-2 w-full">
-                    <p class="text-4xl text-start">Blog Item</p>
-                    <div class="flex flex-inline gap-1 hover:text-accent">
-                        <span class="material-symbols-outlined">
-                            account_circle
-                        </span>
-                        <p>Varad Joshi</p>
-                        <p>at 13:00</p>
-                    </div>
-                    <div class="flex flex-inline gap-4 text-sm">
-                        #EmbeddedSystems
-                        #Firmware
-                        #Microcontrollers
-                        #IoT
-                    </div>
-                </div>
-            </div>
-        </a>
-        <a class="gradient_div p-1 hover:scale-105 active:scale-95" href="#">
-            <div class="flex flex-inline gap-4 bg-base-200 h-36 p-2">
-                <img class="h-full"
-                src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg"
-                alt="Album" />
-                <div class="flex flex-col gap-2 w-full">
-                    <p class="text-4xl text-start">Blog Item</p>
-                    <div class="flex flex-inline gap-1 hover:text-accent">
-                        <span class="material-symbols-outlined">
-                            account_circle
-                        </span>
-                        <p>Varad Joshi</p>
-                        <p>at 13:00</p>
-                    </div>
-                    <div class="flex flex-inline gap-4 text-sm">
-                        #EmbeddedSystems
-                        #Firmware
-                        #Microcontrollers
-                        #IoT
-                    </div>
-                </div>
-            </div>
-        </a>
+        {% endfor %}
+        {% endfor %}
     </div>
   </div>
+  {%endif%}
 </div>
 
 {% endblock %}

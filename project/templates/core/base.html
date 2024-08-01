@@ -70,8 +70,9 @@
                         arrow_back_ios
                     </span>
                 </button>
-                <a href="{% url 'index' %}" class="text-md md:text-xl md:mx-4">
+                <a href="{% url 'index' %}" class="text-md font-bold md:text-xl md:mx-4 hover:text-accent">
                     Embedded Academy
+                    <sup class="font-thin text-sm">(early access)</sup>
                 </a>
             </div>
             
@@ -87,7 +88,7 @@
                         {% if request.user.is_authenticated %}
                         <img
                             alt="Tailwind CSS Navbar component"
-                            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                            src="{{user.profile_image.file.url}}" />
                         {% else %}
                         <span class="text-4xl material-symbols-outlined">
                             account_circle
@@ -99,9 +100,9 @@
                     <ul
                         tabindex="0"
                         class="menu menu-sm dropdown-content bg-base-300 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                        <li><a>Profile</a></li>
-                        <li><a>Settings</a></li>
-                        <li><a>Logout</a></li>
+                        <!--<li><a>Profile</a></li>
+                        <li><a>Settings</a></li>-->
+                        <li><a href="{% url 'account_logout' %}">Logout</a></li>
                     </ul>
                     {% else %}
                     <ul
@@ -127,21 +128,21 @@
                         </span>
                         Home
                     </a>
-                    <a href="#"
+                    <a href="{% url 'coming_soon' %}"
                      class="flex flex-inline gap-1 items-center active:scale-95 hover:text-accent hover:scale-105">
                         <span class="material-symbols-outlined">
                         menu_book
                         </span>
                         Courses
                     </a>
-                    <a href="#"
+                    <a href="{% url 'coming_soon' %}"
                      class="flex flex-inline gap-1 items-center active:scale-95 hover:text-accent hover:scale-105">
                         <span class="material-symbols-outlined">
                         bookmarks
                         </span>
                         Saved
                     </a>
-                    <a href="#"
+                    <a href="{% url 'coming_soon' %}"
                      class="flex flex-inline gap-1 items-center active:scale-95 hover:text-accent hover:scale-105">
                         <span class="material-symbols-outlined">
                         tag

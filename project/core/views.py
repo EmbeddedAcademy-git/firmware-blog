@@ -1,6 +1,18 @@
 from django.shortcuts import render
 from blog.models import *
 
+from django.shortcuts import render
+
+def coming_soon(request):
+    if request.user.is_authenticated:
+        userprofile = Userprofile.objects.get(user=request.user)
+        context = {
+            'user': userprofile,
+        }
+
+    return render(request, 'coming_soon.html', context)
+
+
 def index(request):
     blogs = Blog.objects.all()
     tags = Tag.objects.all()
@@ -11,7 +23,7 @@ def index(request):
             'blogs': blogs,
             'tags': tags,
             'user': userprofile,
-            'list': list
+            'list': list,
         }
     else:
         context = {

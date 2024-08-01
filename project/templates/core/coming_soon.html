@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+{% block title %} Coming Soon! {% endblock %}
+{% block content %}
+<div class="flex items-center justify-center h-screen bg-gray-100">
+    <div class="text-center p-6 bg-white rounded-lg shadow-lg">
+        <h1 class="text-4xl font-bold mb-4">Coming Soon!</h1>
+        <p class="text-lg mb-4">We're working hard to bring you something amazing. Stay tuned!</p>
+        <div class="flex justify-center">
+            <a href="{% url 'home' %}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300">Back to Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
