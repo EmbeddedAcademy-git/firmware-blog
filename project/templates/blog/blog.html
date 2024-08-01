@@ -22,7 +22,7 @@
                         </a>-->
                     </div>
                     
-                    <a class="flex flex-inline gap-1 hover:text-accent" href="{% url 'coming_soon' %}">
+                    <a class="flex flex-inline gap-1 hover:text-accent" href="{% url 'blog_view' blog.id %}">
                         <img class="w-6 mr-1 rounded-full" src="{{blog.author.profile_image.file.url}}">
                         <p>{{blog.author.name}}</p>
                         <p>on {{blog.time_posted}}</p>
