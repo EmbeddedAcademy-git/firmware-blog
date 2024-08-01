@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-scmter7gv=f#06w!!o_mi_!a*xl*%d1$iz-^h7m+@896l@7a9t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['embeddedacademy.co.in', 'www.embeddedacademy.co.in']
 
 
 # Application definition
