@@ -153,7 +153,7 @@
                 
                 <div class="h-full w-0 md:w-1 bg-neutral"></div>
                 
-                <div id="content">{%block content%}{%endblock%}</div>
+               {%block content%}{%endblock%}
             </div>
         </div>
     </div>
@@ -185,7 +185,7 @@
             var hamburger = document.getElementById('hamburger');
             var close_sidebar = document.getElementById('close_sidebar');
             sidebar.classList.toggle('hidden');
-            blog.classList.toggle('hidden');
+            content.classList.toggle('hidden');
             hamburger.classList.toggle('hidden');
             close_sidebar.classList.toggle('hidden');
         });
